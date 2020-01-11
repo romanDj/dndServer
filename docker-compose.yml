@@ -6,8 +6,13 @@ services:
   build: 
    context: .
    dockerfile: dockerfiles/docker_postgres.conf
+  environment:
+    #- PGDATA=/var/lib/postgresql/data/pgdata
+    - POSTGRES_USER=dndadmin
+    - POSTGRES_PASSWORD=123qweASD
+    - POSTGRES_DB=dnd_server
   volumes:
-      - ./dbdata:/var/lib/postgresql/data
+      - postgresql:/var/lib/postgresql/data
  django:
   restart: always
   container_name: dndServer_django
@@ -37,4 +42,5 @@ services:
   ports:
     - "8080:8080"
 volumes:
- sock:
+  sock:
+  postgresql:
